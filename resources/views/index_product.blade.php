@@ -8,11 +8,12 @@
 </head>
 <body>
     @foreach ($products as $product)
+        <img src="{{url('storage/'. $product->image)}}" alt="" width="100px">
         <p>Name : {{$product->name}}</p>
         <p>Rp : {{$product->price}}</p>
-        <p>Deskripsi : {{$product->description}}</p>
-        <p>Stock : {{$product->stock}}</p>
-        <img src="{{url('storage/'. $product->image)}}" alt="" width="100px">
+        <form action="{{route('show_product', $product)}}" method="get">
+            <button type="submit">Detail</button>
+        </form>
     @endforeach
 </body>
 </html>
