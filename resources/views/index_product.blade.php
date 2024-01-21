@@ -14,6 +14,11 @@
         <form action="{{route('show_product', $product)}}" method="get">
             <button type="submit">Detail</button>
         </form>
+        <form action="{{route('delete_product', $product)}}" method="post">
+            @method('delete')
+            @csrf
+            <button type="submit">Hapus</button>
+        </form>
     @endforeach
 </body>
 </html>
