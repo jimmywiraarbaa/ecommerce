@@ -38,6 +38,11 @@ class ProductController extends Controller
             'stock' => $request->stock
         ]);
 
-        return Redirect::route('create_product');
+        return Redirect::route('index_product');
+    }
+
+    public function index_product(){
+        $products = Product::all();
+        return view('index_product', compact('products'));
     }
 }
