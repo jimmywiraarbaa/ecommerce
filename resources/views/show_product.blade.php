@@ -13,5 +13,8 @@
     <p>{{$product->description}}</p>
     <p>Stock :{{$product->stock}}</p>
     <a href="{{route('index_product')}}">Kembali</a>
+    <form action="{{route('edit_product' ,$product)}}" method="get">
+        <button type="submit">Ubah</button>
+    </form>
 </body>
 </html>
