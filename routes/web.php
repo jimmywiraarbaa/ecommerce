@@ -31,3 +31,4 @@ Route::patch('/product/{product}/update', [ProductController::class,'update_prod
 Route::delete('/product/{product}', [ProductController::class,'delete_product'])->name('delete_product');
 
 Route::post('/cart/{product}', [CartController::class,'add_to_cart'])->name('add_to_cart');
+Route::get('/cart', [CartController::class,'show_cart'])->name('show_cart');
