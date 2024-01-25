@@ -11,6 +11,20 @@
         <p>ID : {{$order->id}}</p>
         <p>User : {{$order->user->name}}</p>
         <p>{{$order->created_at}}</p>
+        <p>
+            @if ($order->is_paid == true)
+                Terbayar
+            @else
+                Belum dibayar
+                @if ($order->payment_receipt)
+                    <a href="{{url('storage/'. $order->payment_receipt)}}">Tampilkan Kwitansi</a>
+                @endif
+                <form action="{{route('confirm_payment', $order)}}" method="post">
+                    @csrf
+                    <button type="submit">Konfirmasi</button>
+                </form>
+            @endif
+        </p>
     @endforeach
 </body>
 </html>
