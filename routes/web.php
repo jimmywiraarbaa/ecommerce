@@ -41,3 +41,4 @@ Route::get('/order', [OrderController::class,'index_order'])->name('index_order'
 Route::get('/order/{order}', [OrderController::class,'show_order'])->name('show_order');
 
 Route::post('/order/{order}/pay', [OrderController::class,'submit_payment_receipt'])->name('submit_payment_receipt');
+Route::post('/order/{order}/confirm', [OrderController::class,'confirm_payment'])->name('confirm_payment');
