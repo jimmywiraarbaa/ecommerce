@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->boolean('is_paid')->default(false);
-            $table->string('payment_receipt');
+            $table->string('payment_receipt')->nullable();
             $table->timestamps();
         });
     }
