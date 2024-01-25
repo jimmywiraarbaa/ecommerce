@@ -38,3 +38,4 @@ Route::delete('/cart/{cart}', [CartController::class,'delete_cart'])->name('dele
 
 Route::post('/checkout', [OrderController::class,'checkout'])->name('checkout');
 Route::get('/order', [OrderController::class,'index_order'])->name('index_order');
+Route::get('/order/{order}', [OrderController::class,'show_order'])->name('show_order');
