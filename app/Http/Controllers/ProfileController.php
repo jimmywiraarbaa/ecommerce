@@ -9,17 +9,20 @@ use Illuminate\Support\Facades\Redirect;
 
 class ProfileController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
-    public function show_profile(){
+    public function show_profile()
+    {
         $user = Auth::user();
 
         return view('show_profile', compact('user'));
     }
 
-    public function edit_profile(Request $request){
+    public function edit_profile(Request $request)
+    {
         $request->validate([
             'name' => 'required',
             'password' => 'required|min:8|confirmed'
