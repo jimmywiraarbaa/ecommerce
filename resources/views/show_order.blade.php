@@ -18,6 +18,10 @@
                     <div class="card">
                         <div class="card-header">{{ __('Detail Order') }}</div>
 
+                        @php
+                            $total_price = 0;
+                        @endphp
+
                         <div class="card-body">
                             <h5 class="card-title">ID : {{ $order->id }}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">by {{ $order->user->name }}</h6>
@@ -30,7 +34,12 @@
                             <hr>
                             @foreach ($order->transactions as $transaction)
                                 <p>{{ $transaction->product->name }} - {{ $transaction->amount }} pcs</p>
+                                @php
+                                    $total_price += $transaction->product->price * $transaction->amount;
+                                @endphp
                             @endforeach
+                            <hr>
+                            <p>Total Bayar : Rp.{{ $total_price }}</p>
                             <hr>
 
                             @if ($order->is_paid == null && $order->payment_receipt == null)
