@@ -1,37 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Profile {{$user->name}}</title>
+    <title>Profile {{ $user->name }}</title>
 </head>
+
 <body>
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            <p>{{$error}}</p>
-        @endforeach
-    @endif
+    @extends('layouts.app')
 
-    <p>Nama     : {{$user->name}}</p>
-    <p>Email     : {{$user->email}}</p>
-    <p>Role     : {{$user->is_admin ? 'Admin' : 'Member'}}</p>
+    @section('content')
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">{{ __('Profil') }}</div>
 
-    <form action="{{route('edit_profile')}}" method="post">
-        @csrf
-        <label for="">Nama</label>
-        <br>
-        <input type="text" name="name" value="{{$user->name}}">
-        <br>
-        <label for="">Kata Sandi</label>
-        <br>
-        <input type="password" name="password">
-        <br>
-        <label for="">Konfirmasi Kata Sandi</label>
-        <br>
-        <input type="password" name="password_confirmation">
-        <br>
-        <button type="submit">Edit Profil</button>
-    </form>
+                        <div class="card-body">
+                            @if ($errors->any())
+                                @foreach ($errors->all() as $error)
+                                    <p>{{ $error }}</p>
+                                @endforeach
+                            @endif
+
+                            <form action="{{ route('edit_profile') }}" method="post">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="">Nama</label>
+                                    <input class="form-control" type="text" name="name" value="{{ $user->name }}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Email</label>
+                                    <input class="form-control" type="text" name="name" value="{{ $user->email }}"
+                                        disabled>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Role</label>
+                                    <input class="form-control" type="text" name="name"
+                                        value="{{ $user->is_admin ? 'Admin' : 'Member' }}" disabled>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Kata Sandi</label>
+                                    <input class="form-control" type="password" name="password">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Konfirmasi Kata Sandi</label>
+                                    <input class="form-control" type="password" name="password_confirmation">
+                                </div>
+
+                                <button class="btn btn-primary mt-3" type="submit">Edit Profil</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endsection
+
+
 </body>
+
 </html>
