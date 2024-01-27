@@ -37,10 +37,14 @@
                                                     <a class="btn btn-primary"
                                                         href="{{ url('storage/' . $order->payment_receipt) }}">Tampilkan
                                                         Kwitansi</a>
-                                                    <form action="{{ route('confirm_payment', $order) }}" method="post">
-                                                        @csrf
-                                                        <button class="btn btn-success" type="submit">Konfirmasi</button>
-                                                    </form>
+                                                    @if (Auth::user()->is_admin == true)
+                                                        <form action="{{ route('confirm_payment', $order) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            <button class="btn btn-success"
+                                                                type="submit">Konfirmasi</button>
+                                                        </form>
+                                                    @endif
                                                 </div>
                                             @endif
                                         @endif

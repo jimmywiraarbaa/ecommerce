@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Storage;
 
 class OrderController extends Controller
 {
-    public function checkout(){
+    public function checkout()
+    {
         $user_id = Auth::id();
-        
+
         $carts = Cart::where('user_id', $user_id)->get();
 
         if ($carts == null) {
@@ -40,25 +41,28 @@ class OrderController extends Controller
                 'product_id' => $cart->product_id
             ]);
 
-            $cart->delete(); 
+            $cart->delete();
         }
 
         return Redirect::route('show_order', $order);
     }
 
-    public function index_order(){
+    public function index_order()
+    {
         $orders = Order::all();
 
-        return view ('index_order', compact('orders'));
+        return view('index_order', compact('orders'));
     }
 
-    public function show_order(Order $order){
+    public function show_order(Order $order)
+    {
         return view('show_order', compact('order'));
     }
 
-    public function submit_payment_receipt(Order $order, Request $request){
+    public function submit_payment_receipt(Order $order, Request $request)
+    {
         $file = $request->file('payment_receipt');
-        $path = time(). '_'. $order->id . '.' . $file->getClientOriginalExtension();
+        $path = time() . '_' . $order->id . '.' . $file->getClientOriginalExtension();
 
         Storage::disk('local')->put('public/' . $path, file_get_contents($file));
 
@@ -69,7 +73,8 @@ class OrderController extends Controller
         return Redirect::back();
     }
 
-    public function confirm_payment(Order $order){
+    public function confirm_payment(Order $order)
+    {
         $order->update([
             'is_paid' => true
         ]);
