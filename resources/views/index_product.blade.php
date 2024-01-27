@@ -29,11 +29,13 @@
                                         <form action="{{ route('show_product', $product) }}" method="get">
                                             <button class="btn btn-primary" type="submit">Detail</button>
                                         </form>
-                                        <form action="{{ route('delete_product', $product) }}" method="post">
-                                            @method('delete')
-                                            @csrf
-                                            <button class="btn btn-danger mt-2" type="submit">Hapus</button>
-                                        </form>
+                                        @if (Auth::check() && Auth::user()->is_admin == true)
+                                            <form action="{{ route('delete_product', $product) }}" method="post">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="btn btn-danger mt-2" type="submit">Hapus</button>
+                                            </form>
+                                        @endif
                                     </div>
                                 </div>
                             @endforeach

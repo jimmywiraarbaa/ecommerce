@@ -29,19 +29,24 @@
                                     <h6>{{ $product->description }}</h6>
                                     <hr>
                                     <p>{{ $product->stock }} left</p>
-                                    <form action="{{ route('add_to_cart', $product) }}" method="post">
-                                        @csrf
-                                        <div class="input-group mb-3">
-                                            <input class="form-control" type="number" name="amount" value="1"
-                                                aria-describedby="basic-addon2">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-outline-primary" type="submit">Keranjang</button>
+                                    @if (!Auth::user()->is_admin == true)
+                                        <form action="{{ route('add_to_cart', $product) }}" method="post">
+                                            @csrf
+                                            <div class="input-group mb-3">
+                                                <input class="form-control" type="number" name="amount" value="1"
+                                                    aria-describedby="basic-addon2">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-primary"
+                                                        type="submit">Keranjang</button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </form>
-                                    <form action="{{ route('edit_product', $product) }}" method="get">
-                                        <button class="btn btn-primary" type="submit">Ubah</button>
-                                    </form>
+                                        </form>
+                                    @endif
+                                    @if (Auth::user()->is_admin == true)
+                                        <form action="{{ route('edit_product', $product) }}" method="get">
+                                            <button class="btn btn-primary" type="submit">Ubah</button>
+                                        </form>
+                                    @endif
                                     @if ($errors->any())
                                         @foreach ($errors->all() as $error)
                                             <p>{{ $error }}</p>

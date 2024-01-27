@@ -42,7 +42,7 @@
                             <p>Total Bayar : Rp.{{ $total_price }}</p>
                             <hr>
 
-                            @if ($order->is_paid == null && $order->payment_receipt == null)
+                            @if ($order->is_paid == null && $order->payment_receipt == null && !Auth::user()->is_admin == true)
                                 <form action="{{ route('submit_payment_receipt', $order) }}" method="post"
                                     enctype="multipart/form-data">
                                     @csrf
