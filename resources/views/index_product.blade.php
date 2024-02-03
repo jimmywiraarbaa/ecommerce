@@ -18,7 +18,7 @@
                     <div class="input-group mb-3 justify-content-end">
                         <form action="{{ route('search') }}" method="get" class="d-flex">
                             <input type="text" class="form-control" name="search" placeholder="Search">
-                            <button class="btn btn-primary" type="submit">Search</button>
+                            <button class="btn btn-primary ms-2" type="submit">Search</button>
                         </form>
                     </div>
                     <div class="card">
