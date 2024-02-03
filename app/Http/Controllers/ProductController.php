@@ -9,13 +9,15 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function create_product(){
+    public function create_product()
+    {
         return view('create_product');
     }
 
-    
 
-    public function store_product(Request $request){
+
+    public function store_product(Request $request)
+    {
         $request->validate([
             'name' => 'required',
             'price' => 'required',
@@ -25,7 +27,7 @@ class ProductController extends Controller
         ]);
 
         $file = $request->file('image');
-        $path = time() . '_' . $request->name. '_' . $file->getClientOriginalExtension();
+        $path = time() . '_' . $request->name . '_' . $file->getClientOriginalExtension();
 
         Storage::disk('local')->put('public/' . $path, file_get_contents($file));
 
@@ -41,20 +43,24 @@ class ProductController extends Controller
         return Redirect::route('index_product');
     }
 
-    public function index_product(){
+    public function index_product()
+    {
         $products = Product::all();
         return view('index_product', compact('products'));
     }
 
-    public function show_product(Product $product){
+    public function show_product(Product $product)
+    {
         return view('show_product', compact('product'));
     }
 
-    public function edit_product(Product $product){
+    public function edit_product(Product $product)
+    {
         return view('edit_product', compact('product'));
     }
 
-    public function update_product(Product $product, Request $request){
+    public function update_product(Product $product, Request $request)
+    {
         $request->validate([
             'name' => 'required',
             'price' => 'required',
@@ -64,7 +70,7 @@ class ProductController extends Controller
         ]);
 
         $file = $request->file('image');
-        $path = time() . '_' . $request->name. '_' . $file->getClientOriginalExtension();
+        $path = time() . '_' . $request->name . '_' . $file->getClientOriginalExtension();
 
         Storage::disk('local')->put('public/' . $path, file_get_contents($file));
 
@@ -80,8 +86,19 @@ class ProductController extends Controller
         return Redirect::route('show_product', $product);
     }
 
-    public function delete_product(Product $product){
+    public function delete_product(Product $product)
+    {
         $product->delete();
         return Redirect::route('index_product');
+    }
+
+    public function search(Request $request)
+    {
+        if ($request->has('search')) {
+            $products = Product::where('name', 'LIKE', '%' . $request->search . '%')->get();
+        } else {
+            $products = Product::all();
+        }
+        return view('index_product', compact('products'));
     }
 }

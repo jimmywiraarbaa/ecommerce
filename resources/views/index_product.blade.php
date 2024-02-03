@@ -15,6 +15,12 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8">
+                    <div class="input-group mb-3 justify-content-end">
+                        <form action="{{ route('search') }}" method="get" class="d-flex">
+                            <input type="text" class="form-control" name="search" placeholder="Search">
+                            <button class="btn btn-primary" type="submit">Search</button>
+                        </form>
+                    </div>
                     <div class="card">
                         <div class="card-header">{{ __('Products') }}</div>
 
